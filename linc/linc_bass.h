@@ -8,9 +8,9 @@
 
 namespace linc {
 
-    namespace empty {
+    namespace bass {
 
-        extern int example();
+        extern int test();
 
     } //empty namespace
 

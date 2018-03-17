@@ -1,12 +1,12 @@
 //hxcpp include should be first
 #include <hxcpp.h>
-#include "./linc_empty.h"
+#include "./linc_bass.h"
 
 namespace linc {
 
-    namespace empty {
+    namespace bass {
 
-        int example() {
+        int test() {
             return 55;
         }
 
