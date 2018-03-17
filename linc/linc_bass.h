@@ -12,9 +12,9 @@ namespace linc {
     namespace bass {
 
         extern int test();
-        extern bool init();
         extern int getNumDevices();
         extern bool getDeviceInfo(int index, Array<String> nameAndDriver, int* flags);
+
 
     } //empty namespace
 
