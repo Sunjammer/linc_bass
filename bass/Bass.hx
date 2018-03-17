@@ -436,7 +436,7 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 
 
 
-	// Impls
+	// Init and config
 	@:native('linc::bass::getNumDevices')
 	static function getNumDevices() : Int;
 
@@ -449,7 +449,32 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 	@:native("BASS_Init")
 	static function init(device:Int, freq:Int, flags:Int, hwnd:HWND, clsid:CLSID):Bool;
 
+	@:native("BASS_Start")
+	static function start():Bool;
+
+	@:native("BASS_Stop")
+	static function stop():Bool;
+
+	@:native("BASS_Pause")
+	static function pause():Bool;
+
+	@:native("BASS_SampleGetChannel")
+	static function sampleGetChannel(sample:Sample, onlyNew:Bool):Int;
+	
+	@:native("BASS_ChannelPlay")
+	static function channelPlay(channel:Int, restart:Bool):Bool;
+
+	static inline function checkError():Bool{
+		var error = errorGetCode();
+        if(error != BassError.BASS_OK){
+            trace("There was an error");
+			return false;
+        }
+		return true;
+	}
+
 	static inline function getDeviceInfo(index:Int):Null<DeviceInfo>{
+		force_include();
 		var nameAndDriver:Array<String> = [];
 		var flags = 0;
 		var success = untyped __cpp__("linc::bass::getDeviceInfo({0}, {1}, &{2})", index, nameAndDriver, flags);
@@ -460,6 +485,23 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 			flags:flags
 		}
 	}
+
+
+	// Factories
+
+	static inline function sampleLoad(source:SampleSource, offset:Int, length:Int, max:Int, flags:Int):Sample{
+		force_include();
+		switch(source){
+			case File(path):
+				return untyped __cpp__("BASS_SampleLoad(false, (const void*)({0}.__s), {1}, {2}, {3}, {4})", path, offset, length, max, flags);
+			case Memory(data):
+				return untyped __cpp__("BASS_SampleLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", data, offset, length, max, flags);
+		}
+	}
+
+	
+	@:native("void") 
+	public static function force_include():Void{ };
 
 } //bass
 
