@@ -2,6 +2,7 @@ package bass;
 
 typedef HWND = Int;
 typedef CLSID = Int;
+typedef DWORD = Int;
 
 @:keep
 @:include('linc_bass.h')
@@ -11,79 +12,14 @@ typedef CLSID = Int;
 #end
 extern class Bass {
 
+	// BASS_SetConfigPtr options
+	static inline var BASS_CONFIG_NET_AGENT	=	16;
+	static inline var BASS_CONFIG_NET_PROXY	=	17;
+	static inline var BASS_CONFIG_IOS_NOTIFY=		46;
 
-// Error codes returned by BASS_ErrorGetCode
-
-// BASS_SetConfig options
-static inline var BASS_CONFIG_BUFFER		= 0;
-static inline var BASS_CONFIG_UPDATEPERIOD	= 1;
-static inline var BASS_CONFIG_GVOL_SAMPLE	= 4;
-static inline var BASS_CONFIG_GVOL_STREAM	= 5;
-static inline var BASS_CONFIG_GVOL_MUSIC	= 6;
-static inline var BASS_CONFIG_CURVE_VOL		= 7;
-static inline var BASS_CONFIG_CURVE_PAN		= 8;
-static inline var BASS_CONFIG_FLOATDSP		= 9;
-static inline var BASS_CONFIG_3DALGORITHM	= 10;
-static inline var BASS_CONFIG_NET_TIMEOUT	= 11;
-static inline var BASS_CONFIG_NET_BUFFER	= 12;
-static inline var BASS_CONFIG_PAUSE_NOPLAY	= 13;
-static inline var BASS_CONFIG_NET_PREBUF	= 15;
-static inline var BASS_CONFIG_NET_PASSIVE	= 18;
-static inline var BASS_CONFIG_REC_BUFFER	= 19;
-static inline var BASS_CONFIG_NET_PLAYLIST	= 21;
-static inline var BASS_CONFIG_MUSIC_VIRTUAL	= 22;
-static inline var BASS_CONFIG_VERIFY		= 23;
-static inline var BASS_CONFIG_UPDATETHREADS	= 24;
-static inline var BASS_CONFIG_DEV_BUFFER	= 27;
-static inline var BASS_CONFIG_VISTA_TRUEPOS	= 30;
-static inline var BASS_CONFIG_IOS_MIXAUDIO	= 34;
-static inline var BASS_CONFIG_DEV_DEFAULT	= 36;
-static inline var BASS_CONFIG_NET_READTIMEOUT= 37;
-static inline var BASS_CONFIG_VISTA_SPEAKERS= 38;
-static inline var BASS_CONFIG_IOS_SPEAKER	= 39;
-static inline var BASS_CONFIG_MF_DISABLE	= 40;
-static inline var BASS_CONFIG_HANDLES		= 41;
-static inline var BASS_CONFIG_UNICODE		= 42;
-static inline var BASS_CONFIG_SRC			= 43;
-static inline var BASS_CONFIG_SRC_SAMPLE	= 44;
-static inline var BASS_CONFIG_ASYNCFILE_BUFFER =45;
-static inline var BASS_CONFIG_OGG_PRESCAN		=47;
-static inline var BASS_CONFIG_MF_VIDEO		= 48;
-static inline var BASS_CONFIG_AIRPLAY		= 49;
-static inline var BASS_CONFIG_DEV_NONSTOP	= 50;
-static inline var BASS_CONFIG_IOS_NOCATEGORY= 51;
-static inline var BASS_CONFIG_VERIFY_NET	= 52;
-static inline var BASS_CONFIG_DEV_PERIOD	= 53;
-static inline var BASS_CONFIG_FLOAT			= 54;
-static inline var BASS_CONFIG_NET_SEEK		= 56;
-static inline var BASS_CONFIG_AM_DISABLE			= 58;
-static inline var BASS_CONFIG_NET_PLAYLIST_DEPTH	= 59;
-static inline var BASS_CONFIG_NET_PREBUF_WAIT		= 60;
-
-// BASS_SetConfigPtr options
-static inline var BASS_CONFIG_NET_AGENT	=	16;
-static inline var BASS_CONFIG_NET_PROXY	=	17;
-static inline var BASS_CONFIG_IOS_NOTIFY=		46;
-
-// BASS_Init flags
-static inline var BASS_DEVICE_8BITS	=	1;		// 8 bit
-static inline var BASS_DEVICE_MONO	=	2;		// mono
-static inline var BASS_DEVICE_3D	=		4;		// enable 3D functionality
-static inline var BASS_DEVICE_16BITS=		8;		// limit output to 16 bit
-static inline var BASS_DEVICE_LATENCY	=	0x100;	// calculate device latency (BASS_INFO struct)
-static inline var BASS_DEVICE_CPSPEAKERS=	0x400;	// detect speakers via Windows control panel
-static inline var BASS_DEVICE_SPEAKERS=	0x800;	// force enabling of speaker assignment
-static inline var BASS_DEVICE_NOSPEAKER=	0x1000;	// ignore speaker arrangement
-static inline var BASS_DEVICE_DMIX	=	0x2000;	// use ALSA "dmix" plugin
-static inline var BASS_DEVICE_FREQ	=	0x4000;	// set device sample rate
-static inline var BASS_DEVICE_STEREO=		0x8000;	// limit output to stereo
-static inline var BASS_DEVICE_HOG	=		0x10000;	// hog/exclusive mode
-static inline var BASS_DEVICE_AUDIOTRACK=	0x20000;	// use AudioTrack output
-static inline var BASS_DEVICE_DSOUND	=	0x40000;	// use DirectSound output
-
-// DirectSound interfaces (for use with BASS_GetDSoundObject)
-static inline var BASS_OBJECT_DS	=	1;	// IDirectSound
-static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
+	// DirectSound interfaces (for use with BASS_GetDSoundObject)
+	static inline var BASS_OBJECT_DS	=	1;	// IDirectSound
+	static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 
 	// BASS_DEVICEINFO flags
 	static inline var BASS_DEVICE_ENABLED			= 1;                                                                                                                  
@@ -120,7 +56,6 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 	// BASS_RECORDINFO flags (from DSOUND.H)
 	static inline var DSCCAPS_EMULDRIVER 	= DSCAPS_EMULDRIVER;	// device does NOT have hardware DirectSound recording support
 	static inline var DSCCAPS_CERTIFIED		= DSCAPS_CERTIFIED;		// device driver has been certified by Microsoft
-
 
 	static inline var WAVE_FORMAT_1M08  	= 0x00000001;       /* 11.025 kHz, Mono,   8-bit  */
 	static inline var WAVE_FORMAT_1S08  	= 0x00000002;       /* 11.025 kHz, Stereo, 8-bit  */
@@ -249,9 +184,6 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 	static inline var BASS_3DALG_OFF 		= 1;
 	static inline var BASS_3DALG_FULL 		= 2;
 	static inline var BASS_3DALG_LIGHT 		= 3;
-
-	//TODO: Enum abstract 
-
 
 	static inline var BASS_STREAMPROC_END	= 0x80000000;	// end of user stream flag
 
@@ -437,6 +369,15 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 
 
 	// Init and config
+
+	/** Get CPU use as a percentage **/
+	@:native("BASS_GetCPU")
+	static function getCPU():Float;
+
+	/** Get the audio device used by the calling thread **/
+	@:native("BASS_GetDevice")
+	static function getDevice():Int;
+
 	@:native('linc::bass::getNumDevices')
 	static function getNumDevices() : Int;
 
@@ -458,12 +399,6 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 	@:native("BASS_Pause")
 	static function pause():Bool;
 
-	@:native("BASS_SampleGetChannel")
-	static function sampleGetChannel(sample:Sample, onlyNew:Bool):Int;
-	
-	@:native("BASS_ChannelPlay")
-	static function channelPlay(channel:Int, restart:Bool):Bool;
-
 	static inline function checkError():Bool{
 		var error = errorGetCode();
         if(error != BassError.BASS_OK){
@@ -479,25 +414,70 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 		var flags = 0;
 		var success = untyped __cpp__("linc::bass::getDeviceInfo({0}, {1}, &{2})", index, nameAndDriver, flags);
 		if(!success) return null;
-		return {
-			name:nameAndDriver[0],
-			driver:nameAndDriver[1],
-			flags:flags
-		}
+		return new DeviceInfo(
+			nameAndDriver[0],
+			nameAndDriver[1],
+			flags
+		);
 	}
 
+	static inline function getInfo():Null<BassInfo>{
+		force_include();
+		var args:Array<Int> = [];
+		var success = untyped __cpp__("linc::bass::getInfo({0})", args);
+		if(!success) return null;
+		return new BassInfo(args);
+	}
 
-	// Factories
+	// Samples
+
+	@:native("BASS_SampleGetChannel")
+	static function sampleGetChannel(sample:Sample, onlyNew:Bool = false):Channel;
+
+	@:native("BASS_SampleFree")
+	static function sampleFree(sample:Sample):Bool;
+
+	@:native("BASS_SampleCreate")
+	static function sampleCreate(length:Int, freq:Int, chans:Int, max:Int, flags:Int):Sample;
+
+	@:native("BASS_SampleStop")
+	static function sampleStop(sample:Sample):Bool;
+
+	static inline function sampleGetInfo(sample:Sample):Sample.SampleInfo{
+		force_include();
+		var floats:Array<Float> = [];
+		var ints:Array<Int> = [];
+		untyped __cpp__("linc::bass::sampleGetInfo({0}, {1}, {2})", sample, ints, floats);
+		return new Sample.SampleInfo(ints, floats);
+	}
+	static inline function sampleSetInfo(sample:Sample, info:Sample.SampleInfo):Bool{
+		force_include();
+		return untyped __cpp__("linc::bass::sampleSetInfo({0}, {1}, {2})", sample, info.ints, info.floats);
+	}
+
+	static inline function sampleLoadPath(path:String, offset:Int, length:Int, max:Int, flags:Int):Sample{
+		force_include();
+		return untyped __cpp__("BASS_SampleLoad(false, (const void*)({0}.__s), {1}, {2}, {3}, {4})", path, offset, length, max, flags);
+	}
+
+	static inline function sampleLoadData(bytes:haxe.io.BytesData, offset:Int, length:Int, max:Int, flags:Int):Sample{
+		force_include();
+		return untyped __cpp__("BASS_SampleLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, max, flags);
+	}
 
 	static inline function sampleLoad(source:SampleSource, offset:Int, length:Int, max:Int, flags:Int):Sample{
-		force_include();
 		switch(source){
 			case File(path):
-				return untyped __cpp__("BASS_SampleLoad(false, (const void*)({0}.__s), {1}, {2}, {3}, {4})", path, offset, length, max, flags);
+				return sampleLoadPath(path, offset, length, max, flags);
 			case Memory(data):
-				return untyped __cpp__("BASS_SampleLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", data, offset, length, max, flags);
+				return sampleLoadData(data, offset, length, max, flags);
 		}
 	}
+
+	// Channels
+	
+	@:native("BASS_ChannelPlay")
+	static function channelPlay(channel:Channel, restart:Bool = false):Bool;
 
 	
 	@:native("void") 
@@ -505,63 +485,3 @@ static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
 
 } //bass
 
-
-enum EaxEnvironment
-{
-	EAX_ENVIRONMENT_GENERIC;
-	EAX_ENVIRONMENT_PADDEDCELL;
-	EAX_ENVIRONMENT_ROOM;
-	EAX_ENVIRONMENT_BATHROOM;
-	EAX_ENVIRONMENT_LIVINGROOM;
-	EAX_ENVIRONMENT_STONEROOM;
-	EAX_ENVIRONMENT_AUDITORIUM;
-	EAX_ENVIRONMENT_CONCERTHALL;
-	EAX_ENVIRONMENT_CAVE;
-	EAX_ENVIRONMENT_ARENA;
-	EAX_ENVIRONMENT_HANGAR;
-	EAX_ENVIRONMENT_CARPETEDHALLWAY;
-	EAX_ENVIRONMENT_HALLWAY;
-	EAX_ENVIRONMENT_STONECORRIDOR;
-	EAX_ENVIRONMENT_ALLEY;
-	EAX_ENVIRONMENT_FOREST;
-	EAX_ENVIRONMENT_CITY;
-	EAX_ENVIRONMENT_MOUNTAINS;
-	EAX_ENVIRONMENT_QUARRY;
-	EAX_ENVIRONMENT_PLAIN;
-	EAX_ENVIRONMENT_PARKINGLOT;
-	EAX_ENVIRONMENT_SEWERPIPE;
-	EAX_ENVIRONMENT_UNDERWATER;
-	EAX_ENVIRONMENT_DRUGGED;
-	EAX_ENVIRONMENT_DIZZY;
-	EAX_ENVIRONMENT_PSYCHOTIC;
-	EAX_ENVIRONMENT_COUNT;			// total number of environments
-}
-
-/*enum EAXPresets{
-	EAX_PRESET_GENERIC         = EAX_ENVIRONMENT_GENERIC,0.5F,1.493F,0.5F
-	EAX_PRESET_PADDEDCELL      = EAX_ENVIRONMENT_PADDEDCELL,0.25F,0.1F,0.0F
-	EAX_PRESET_ROOM            = EAX_ENVIRONMENT_ROOM,0.417F,0.4F,0.666F
-	EAX_PRESET_BATHROOM        = EAX_ENVIRONMENT_BATHROOM,0.653F,1.499F,0.166F
-	EAX_PRESET_LIVINGROOM      = EAX_ENVIRONMENT_LIVINGROOM,0.208F,0.478F,0.0F
-	EAX_PRESET_STONEROOM       = EAX_ENVIRONMENT_STONEROOM,0.5F,2.309F,0.888F
-	EAX_PRESET_AUDITORIUM      = EAX_ENVIRONMENT_AUDITORIUM,0.403F,4.279F,0.5F
-	EAX_PRESET_CONCERTHALL     = EAX_ENVIRONMENT_CONCERTHALL,0.5F,3.961F,0.5F
-	EAX_PRESET_CAVE            = EAX_ENVIRONMENT_CAVE,0.5F,2.886F,1.304F
-	EAX_PRESET_ARENA           = EAX_ENVIRONMENT_ARENA,0.361F,7.284F,0.332F
-	EAX_PRESET_HANGAR          = EAX_ENVIRONMENT_HANGAR,0.5F,10.0F,0.3F
-	EAX_PRESET_CARPETEDHALLWAY = EAX_ENVIRONMENT_CARPETEDHALLWAY,0.153F,0.259F,2.0F
-	EAX_PRESET_HALLWAY         = EAX_ENVIRONMENT_HALLWAY,0.361F,1.493F,0.0F
-	EAX_PRESET_STONECORRIDOR   = EAX_ENVIRONMENT_STONECORRIDOR,0.444F,2.697F,0.638F
-	EAX_PRESET_ALLEY           = EAX_ENVIRONMENT_ALLEY,0.25F,1.752F,0.776F
-	EAX_PRESET_FOREST          = EAX_ENVIRONMENT_FOREST,0.111F,3.145F,0.472F
-	EAX_PRESET_CITY            = EAX_ENVIRONMENT_CITY,0.111F,2.767F,0.224F
-	EAX_PRESET_MOUNTAINS       = EAX_ENVIRONMENT_MOUNTAINS,0.194F,7.841F,0.472F
-	EAX_PRESET_QUARRY          = EAX_ENVIRONMENT_QUARRY,1.0F,1.499F,0.5F
-	EAX_PRESET_PLAIN           = EAX_ENVIRONMENT_PLAIN,0.097F,2.767F,0.224F
-	EAX_PRESET_PARKINGLOT      = EAX_ENVIRONMENT_PARKINGLOT,0.208F,1.652F,1.5F
-	EAX_PRESET_SEWERPIPE       = EAX_ENVIRONMENT_SEWERPIPE,0.652F,2.886F,0.25F
-	EAX_PRESET_UNDERWATER      = EAX_ENVIRONMENT_UNDERWATER,1.0F,1.499F,0.0F
-	EAX_PRESET_DRUGGED         = EAX_ENVIRONMENT_DRUGGED,0.875F,8.392F,1.388F
-	EAX_PRESET_DIZZY           = EAX_ENVIRONMENT_DIZZY,0.139F,17.234F,0.666F
-	EAX_PRESET_PSYCHOTIC       = EAX_ENVIRONMENT_PSYCHOTIC,0.486F,7.563F,0.806F
-}*/
