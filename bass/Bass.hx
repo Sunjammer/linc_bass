@@ -365,14 +365,17 @@ extern class Bass {
 	static inline var BASS_IOSNOTIFY_INTERRUPT		= 1;	// interruption started
 	static inline var BASS_IOSNOTIFY_INTERRUPT_END	= 2;	// interruption ended
 
-
-
-
 	// Init and config
 
 	/** Get CPU use as a percentage **/
 	@:native("BASS_GetCPU")
 	static function getCPU():Float;
+
+	@:native("BASS_GetConfig")
+	static function getConfig(option:Int):Int;
+
+	@:native("BASS_SetConfig")
+	static function setConfig(option:Int, value:Int):Bool;
 
 	/** Get the audio device used by the calling thread **/
 	@:native("BASS_GetDevice")
