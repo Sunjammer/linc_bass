@@ -1,6 +1,6 @@
 package bass;
 
-typedef HWND = Int;
+typedef HWND = cpp.Pointer<cpp.Void>;
 typedef CLSID = Int;
 typedef DWORD = Int;
 
@@ -387,8 +387,11 @@ extern class Bass {
 	@:native("BASS_ErrorGetCode")
 	static function errorGetCode():BassError;
 
-	@:native("BASS_Init")
-	static function init(device:Int, freq:Int, flags:Int, hwnd:HWND, clsid:CLSID):Bool;
+	static inline function init(device:Int, freq:Int, flags:Int, hwnd:HWND, clsid:CLSID):Bool
+	{
+		untyped __cpp__("HWND w = (HWND)(void*){0};", hwnd);
+		return untyped __cpp__("BASS_Init({0},{1},{2},w,{3})", device, freq, flags, clsid);
+	}
 
 	@:native("BASS_Start")
 	static function start():Bool;
