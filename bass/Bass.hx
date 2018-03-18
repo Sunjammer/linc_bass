@@ -441,12 +441,12 @@ extern class Bass {
 		return out;
 	}
 
-	inline static function sampleGetData(sample:Sample, out:BytesData):Bool{
+	inline static function sampleGetData(sample:Sample, out:haxe.io.BytesData):Bool{
 		force_include();
 		return untyped __cpp__("BASS_SampleGetData({0}, (void*)&({1}[0]))", sample, out);
 	}
 
-	inline static function sampleSetData(sample:Sample, data:BytesData):Bool{
+	inline static function sampleSetData(sample:Sample, data:haxe.io.BytesData):Bool{
 		force_include();
 		return untyped __cpp__("BASS_SampleSetData({0}, (void*)&({1}[0]))", sample, data);
 	}
