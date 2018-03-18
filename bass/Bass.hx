@@ -496,6 +496,54 @@ extern class Bass {
 	@:native("BASS_ChannelPlay")
 	static function channelPlay(channel:Channel, restart:Bool = false):Bool;
 
+	@:native("BASS_ChannelStop")
+	static function channelStop(channel:Channel):Bool;
+
+	@:native("BASS_ChannelPause")
+	static function channelPause(channel:Channel):Bool;
+	
+	@:native("BASS_ChannelFlags")
+	static function channelFlags(channel:Channel, flags:Int, mask:Int):Int;
+
+	@:native("BASS_ChannelIsActive")
+	static function channelIsActive(channel:Channel):Bool;
+
+	@:native("BASS_ChannelIsSliding")
+	static function channelIsSliding(channel:Channel, attrib:Int):Bool;
+
+	@:native("BASS_ChannelLock")
+	static function channelLock(channel:Channel, lock:Bool):Bool;
+
+	@:native("BASS_ChannelBytes2Seconds")
+	static function channelBytes2Seconds(channel:Channel, pos:Int):Float;
+
+	@:native("BASS_ChannelSeconds2Bytes")
+	static function channelSeconds2Bytes(channel:Channel, pos:Float):Int;
+
+	@:native("BASS_ChannelGetDevice")
+	static function channelGetDevice(channel:Channel):Int;
+
+	@:native("BASS_ChannelGetLength")
+	static function channelGetLength(channel:Channel, mode:Int):Int;
+
+	@:native("BASS_ChannelGetLevel")
+	static function channelGetLevel(channel:Channel):Int;
+
+	@:native("BASS_ChannelGetPosition")
+	static function channelGetPosition(channel:Channel, mode:Int):Int;
+
+	@:native("BASS_ChannelSetDevice")
+	static function channelSetDevice(channel:Channel, device:Int):Bool;
+	
+	@:native("BASS_ChannelSetLink")
+	static function channelSetLink(a:Channel, b:Channel):Bool;
+
+	@:native("BASS_ChannelSetPosition")
+	static function channelSetPosition(channel:Channel, pos:Int, mode:Int):Bool;
+
+	@:native("BASS_ChannelSlideAttribute")
+	static function channelSlideAttribute(channel:Channel, attrib:Int, value:Float, time:Int):Bool;
+
 	
 	@:native("void") 
 	public static function force_include():Void{ };
