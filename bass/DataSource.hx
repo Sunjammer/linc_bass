@@ -1,6 +1,6 @@
 package bass;
 
-enum SampleSource{
+enum DataSource{
     File(path:String);
     Memory(bytes:haxe.io.BytesData);
 }
