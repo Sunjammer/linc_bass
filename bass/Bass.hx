@@ -497,6 +497,32 @@ extern class Bass {
 		}
 	}
 
+	// Music
+
+	
+
+	static inline function musicLoadPath(path:String, offset:Int, length:Int, flags:Int, freq:Int):Music{
+		force_include();
+		return untyped __cpp__("BASS_MusicLoad(false, (const void*)({0}.__s), {1}, {2}, {3}, {4})", path, offset, length, flags, freq);
+	}
+
+	static inline function musicLoadData(bytes:haxe.io.BytesData, offset:Int, length:Int, flags:Int, freq:Int):Music{
+		force_include();
+		return untyped __cpp__("BASS_MusicLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, flags, freq);
+	}
+
+	static inline function musicLoad(source:DataSource, offset:Int, length:Int, flags:Int, freq:Int):Music{
+		switch(source){
+			case File(path):
+				return musicLoadPath(path, offset, length, flags, freq);
+			case Memory(data):
+				return musicLoadData(data, offset, length, flags, freq);
+		}
+	}
+
+	@:native("BASS_MusicFree")
+	static function musicFree(handle:Music):Bool;
+
 	// Channels
 	
 	@:native("BASS_ChannelPlay")
