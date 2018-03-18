@@ -17,6 +17,7 @@ namespace linc {
         extern bool getInfo(Array<int> out);
         extern bool sampleGetInfo(int sample, Array<int> ints, Array<float> floats);
         extern bool sampleSetInfo(int sample, Array<int> ints, Array<float> floats);
+        extern int sampleGetChannels(int sample, Array<int> channels);
 
     } //empty namespace
 

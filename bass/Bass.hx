@@ -434,6 +434,23 @@ extern class Bass {
 	@:native("BASS_SampleGetChannel")
 	static function sampleGetChannel(sample:Sample, onlyNew:Bool = false):Channel;
 
+	static inline function sampleGetChannels(sample:Sample):Array<Channel>{
+		force_include();
+		var out:Array<Channel> = [];
+		untyped __cpp__("linc::bass::sampleGetChannels({0}, {1})", sample, out);
+		return out;
+	}
+
+	inline static function sampleGetData(sample:Sample, out:BytesData):Bool{
+		force_include();
+		return untyped __cpp__("BASS_SampleGetData({0}, (void*)&({1}[0]))", sample, out);
+	}
+
+	inline static function sampleSetData(sample:Sample, data:BytesData):Bool{
+		force_include();
+		return untyped __cpp__("BASS_SampleSetData({0}, (void*)&({1}[0]))", sample, data);
+	}
+
 	@:native("BASS_SampleFree")
 	static function sampleFree(sample:Sample):Bool;
 

@@ -78,6 +78,19 @@ namespace linc {
             info.pan        = floats[4];
             return BASS_SampleSetInfo(sample, &info);
         }
+        
+        extern int sampleGetChannels(int sample, Array<int> out){
+            BASS_SAMPLE info;
+            DWORD a, count;
+            BASS_SampleGetInfo(sample, &info);
+            HCHANNEL* channels = new HCHANNEL[info.max];
+            count = BASS_SampleGetChannels(sample, channels);
+            for (a=0; a<count; a++){
+                out[a] = channels[a];
+            }
+            delete[] channels; 
+            return count;
+        }
 
         extern bool getInfo(Array<int> out){
             BASS_INFO info;
