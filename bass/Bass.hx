@@ -488,7 +488,7 @@ extern class Bass {
 		return untyped __cpp__("BASS_SampleLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, max, flags);
 	}
 
-	static inline function sampleLoad(source:SampleSource, offset:Int, length:Int, max:Int, flags:Int):Sample{
+	static inline function sampleLoad(source:DataSource, offset:Int, length:Int, max:Int, flags:Int):Sample{
 		switch(source){
 			case File(path):
 				return sampleLoadPath(path, offset, length, max, flags);
