@@ -390,10 +390,14 @@ extern class Bass {
 	@:native("BASS_ErrorGetCode")
 	static function errorGetCode():BassError;
 
-	static inline function init(device:Int, freq:Int, flags:Int, hwnd:HWND, clsid:CLSID):Bool
+	static inline function init(device:Int, freq:Int, flags:Int, #if !mac hwnd:HWND #else hwnd:Int #end, clsid:CLSID):Bool
 	{
-		untyped __cpp__("HWND w = (HWND)(void*){0};", hwnd);
-		return untyped __cpp__("BASS_Init({0},{1},{2},w,{3})", device, freq, flags, clsid);
+		#if !mac
+			untyped __cpp__("HWND w = (HWND)(void*){0};", hwnd);
+			return untyped __cpp__("BASS_Init({0},{1},{2},w,{3})", device, freq, flags, clsid);
+		#else
+			return untyped __cpp__("BASS_Init({0},{1},{2},{3},{4})", device, freq, flags, hwnd, clsid);
+		#end
 	}
 
 	@:native("BASS_Start")
@@ -485,7 +489,7 @@ extern class Bass {
 
 	static inline function sampleLoadData(bytes:haxe.io.BytesData, offset:Int, length:Int, max:Int, flags:Int):Sample{
 		force_include();
-		return untyped __cpp__("BASS_SampleLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, max, flags);
+		return untyped __cpp__("BASS_SampleLoad(true, (const int*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, max, flags);
 	}
 
 	static inline function sampleLoad(source:DataSource, offset:Int, length:Int, max:Int, flags:Int):Sample{
@@ -508,7 +512,7 @@ extern class Bass {
 
 	static inline function musicLoadData(bytes:haxe.io.BytesData, offset:Int, length:Int, flags:Int, freq:Int):Music{
 		force_include();
-		return untyped __cpp__("BASS_MusicLoad(true, (const WCHAR*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, flags, freq);
+		return untyped __cpp__("BASS_MusicLoad(true, (const int*)&{0}[0], {1}, {2}, {3}, {4})", bytes, offset, length, flags, freq);
 	}
 
 	static inline function musicLoad(source:DataSource, offset:Int, length:Int, flags:Int, freq:Int):Music{
