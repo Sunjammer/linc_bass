@@ -527,6 +527,32 @@ extern class Bass {
 	@:native("BASS_MusicFree")
 	static function musicFree(handle:Music):Bool;
 
+	// Streams
+
+	@:native("BASS_StreamCreate")
+	static function streamCreate(freq:Int, chans:Int, flags:Int, proc:Dynamic, user:Int):Stream; //TODO: Proc, user
+	
+	static inline function streamCreateFile(path:String, offset:Int, length:Int, flags:Int):Stream{
+		force_include();
+		return untyped __cpp__("BASS_StreamCreateFile(false, (const void*)({0}.__s), {1}, {2}, {3})", path, offset, length, flags);
+	}
+
+	static inline function streamCreateData(bytes:haxe.io.BytesData, offset:Int, length:Int, flags:Int):Stream{
+		force_include();
+		return untyped __cpp__("BASS_StreamCreateFile(true, (const WCHAR*)&{0}[0], {1}, {2}, {3})", bytes, offset, length, flags);
+	}
+
+	static inline function streamCreateURL(url:String, offset:Int, flags:Int, proc:Dynamic, user:Int):Stream{
+		force_include();
+		return untyped __cpp__("BASS_StreamCreateURL({0}.__s, {1}, {2}, {3}, {4})", url, offset, flags, proc, user); //TODO: Proc, user
+	}
+
+	@:native("BASS_StreamFree")
+	static function streamFree(handle:Stream):Bool;
+
+	@:native("BASS_StreamGetFilePosition")
+	static function streamGetFilePosition(handle:Stream, mode:Int):Int;
+
 	// Channels
 	
 	@:native("BASS_ChannelPlay")
