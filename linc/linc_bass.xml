@@ -1,13 +1,9 @@
 <xml>
 
-<files id='haxe'>
+    <files id='haxe'>
         <compilerflag value='-DLINC_BASS'/>
-        <compilerflag value='-I${LINC_BASS_PATH}/linc/'/>
-        <file name='${LINC_BASS_PATH}linc/linc_bass.cpp' />
-    </files>
-
-    <files id="__main__">
         <compilerflag value='-I${LINC_BASS_PATH}linc/'/>
+        <file name='${LINC_BASS_PATH}linc/linc_bass.cpp' />
     </files>
 
     <target id="haxe">
@@ -15,5 +11,7 @@
             <lib name='${LINC_BASS_PATH}lib/bass.lib' />
         </section>
     </target>
+
+    <copyFile name="bass.dll" from="${LINC_BASS_PATH}deps"/>
 
 </xml>
