@@ -10,8 +10,12 @@
         <section if="windows">
             <lib name='${LINC_BASS_PATH}lib/bass.lib' />
         </section>
+        <section if="mac">
+            <lib name='${LINC_BASS_PATH}deps/libbass.dylib' />
+        </section>
     </target>
 
-    <copyFile name="bass.dll" from="${LINC_BASS_PATH}deps"/>
+    <copyFile name="bass.dll" from="${LINC_BASS_PATH}deps" if="windows"/>
+    <copyFile name="libbass.dylib" from="${LINC_BASS_PATH}deps" if="mac"/>
 
 </xml>
