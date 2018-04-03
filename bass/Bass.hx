@@ -70,51 +70,8 @@ extern class Bass {
 	static inline var WAVE_FORMAT_4M16  	= 0x00000400;       /* 44.1   kHz, Mono,   16-bit */
 	static inline var WAVE_FORMAT_4S16 		= 0x00000800;       /* 44.1   kHz, Stereo, 16-bit */
 
-	static inline var BASS_SAMPLE_8BITS		= 1;	// 8 bit
-	static inline var BASS_SAMPLE_FLOAT		= 256;	// 32 bit floating-point
-	static inline var BASS_SAMPLE_MONO		= 2;	// mono
-	static inline var BASS_SAMPLE_LOOP		= 4;	// looped
-	static inline var BASS_SAMPLE_3D		= 8;	// 3D functionality
-	static inline var BASS_SAMPLE_SOFTWARE	= 16;	// not using hardware mixing
-	static inline var BASS_SAMPLE_MUTEMAX	= 32;	// mute at max distance (3D only)
-	static inline var BASS_SAMPLE_VAM		= 64;	// DX7 voice allocation & management
-	static inline var BASS_SAMPLE_FX		= 128;	// old implementation of DX8 effects
-	static inline var BASS_SAMPLE_OVER_VOL	= 0x10000;	// override lowest volume
-	static inline var BASS_SAMPLE_OVER_POS	= 0x20000;	// override longest playing
-	static inline var BASS_SAMPLE_OVER_DIST	= 0x30000; // override furthest from listener (3D only)
-
-	static inline var BASS_STREAM_PRESCAN	= 0x20000; // enable pin-point seeking/length (MP3/MP2/MP1)
-	static inline var BASS_STREAM_AUTOFREE  = 0x40000;	// automatically free the stream when it stop/ends
-	static inline var BASS_STREAM_RESTRATE  = 0x80000;	// restrict the download rate of internet file streams
-	static inline var BASS_STREAM_BLOCK		= 0x100000; // download/play internet file stream in small blocks
-	static inline var BASS_STREAM_DECODE	= 0x200000; // don't play the stream, only decode (BASS_ChannelGetData)
-	static inline var BASS_STREAM_STATUS	= 0x800000; // give server status info (HTTP/ICY tags) in DOWNLOADPROC
-
-	static inline var BASS_MP3_IGNOREDELAY  = 0x200; // ignore LAME/Xing/VBRI/iTunes delay & padding info
-	static inline var BASS_MP3_SETPOS		= BASS_STREAM_PRESCAN;
-
-	static inline var BASS_MUSIC_FLOAT		= BASS_SAMPLE_FLOAT;
-	static inline var BASS_MUSIC_MONO		= BASS_SAMPLE_MONO;
-	static inline var BASS_MUSIC_LOOP		= BASS_SAMPLE_LOOP;
-	static inline var BASS_MUSIC_3D			= BASS_SAMPLE_3D;
-	static inline var BASS_MUSIC_FX			= BASS_SAMPLE_FX;
-	static inline var BASS_MUSIC_AUTOFREE	= BASS_STREAM_AUTOFREE;
-	static inline var BASS_MUSIC_DECODE		= BASS_STREAM_DECODE;
-	static inline var BASS_MUSIC_PRESCAN	= BASS_STREAM_PRESCAN;	// calculate playback length
-	static inline var BASS_MUSIC_CALCLEN	= BASS_MUSIC_PRESCAN;
-	static inline var BASS_MUSIC_RAMP		= 0x200;	// normal ramping
-	static inline var BASS_MUSIC_RAMPS		= 0x400;	// sensitive ramping
-	static inline var BASS_MUSIC_SURROUND	= 0x800;	// surround sound
-	static inline var BASS_MUSIC_SURROUND2	= 0x1000;	// surround sound (mode 2)
-	static inline var BASS_MUSIC_FT2PAN		= 0x2000;	// apply FastTracker 2 panning to XM files
-	static inline var BASS_MUSIC_FT2MOD		= 0x2000;	// play .MOD as FastTracker 2 does
-	static inline var BASS_MUSIC_PT1MOD		= 0x4000;	// play .MOD as ProTracker 1 does
-	static inline var BASS_MUSIC_NONINTER	= 0x10000;	// non-interpolated sample mixing
-	static inline var BASS_MUSIC_SINCINTER	= 0x800000; // sinc interpolated sample mixing
-	static inline var BASS_MUSIC_POSRESET	= 0x8000;	// stop all notes when moving position
-	static inline var BASS_MUSIC_POSRESETEX	= 0x400000; // stop all notes and reset bmp/etc when moving position
-	static inline var BASS_MUSIC_STOPBACK	= 0x80000;	// stop the music on a backwards jump effect
-	static inline var BASS_MUSIC_NOSAMPLE	= 0x100000; // don't load the samples
+	static inline var BASS_MP3_IGNOREDELAY   = 0x200; // ignore LAME/Xing/VBRI/iTunes delay & padding info
+	static inline var BASS_MP3_SETPOS		= Stream.BASS_STREAM_PRESCAN;
 
 	// Speaker assignment flags
 	static inline function BASS_SPEAKER_N(n:Int):Int { return ((n)<<24); } // n'th pair of speakers (max 15)
@@ -532,6 +489,7 @@ extern class Bass {
 	@:native("BASS_StreamCreate")
 	static function streamCreate(freq:Int, chans:Int, flags:Int, proc:Dynamic, user:Int):Stream; //TODO: Proc, user
 	
+
 	static inline function streamCreateFile(path:String, offset:Int, length:Int, flags:Int):Stream{
 		force_include();
 		return untyped __cpp__("BASS_StreamCreateFile(false, (const void*)({0}.__s), {1}, {2}, {3})", path, offset, length, flags);
