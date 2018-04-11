@@ -1,5 +1,9 @@
+BASS is a commercial product with its own licensing model. 
+Please consult https://www.un4seen.com/ for details.
+
 The MIT License (MIT)
 
+Copyright (c) 2018 Andreas Rønning   
 Copyright (c) 2015 Sven Bergström   
 Copyright (c) 2015 snõwkit contributors
 
