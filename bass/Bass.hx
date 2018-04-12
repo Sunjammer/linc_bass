@@ -1,6 +1,7 @@
 package bass;
 
-typedef HWND = cpp.Pointer<cpp.Void>;
+import cpp.Pointer;
+typedef HWND = Pointer<cpp.Void>;
 typedef CLSID = Int;
 typedef DWORD = Int;
 
@@ -347,7 +348,7 @@ extern class Bass {
 	@:native("BASS_ErrorGetCode")
 	static function errorGetCode():BassError;
 
-	static inline function init(device:Int, freq:Int, flags:Int, #if !mac hwnd:HWND #else hwnd:Int #end, clsid:CLSID):Bool
+	static inline function init(device:Int, freq:Int, flags:Int, #if windows hwnd:HWND #else hwnd:Int #end, clsid:CLSID):Bool
 	{
 		#if !mac
 			untyped __cpp__("HWND w = (HWND)(void*){0};", hwnd);
@@ -560,6 +561,12 @@ extern class Bass {
 
 	@:native("BASS_ChannelSetPosition")
 	static function channelSetPosition(channel:Channel, pos:Int, mode:Int):Bool;
+
+	@:native("BASS_ChannelSetAttribute")
+	static function channelSetAttribute(channel:Channel, attrib:Int, value:Float):Bool;
+
+	@:native("BASS_ChannelGetAttribute")
+	static function channelGetAttribute(channel:Channel, attrib:Int, value:Pointer<Float>):Bool;
 
 	@:native("BASS_ChannelSlideAttribute")
 	static function channelSlideAttribute(channel:Channel, attrib:Int, value:Float, time:Int):Bool;
