@@ -1,11 +1,8 @@
 #pragma once
 
-//hxcpp include should always be first    
 #include <hxcpp.h>
 #include "../lib/bass.h"
-
-//include other library includes as needed
-// #include "../lib/____"
+#include "../lib/bass_fx.h"
 
 namespace linc {
 

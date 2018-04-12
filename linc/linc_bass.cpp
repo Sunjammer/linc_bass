@@ -1,5 +1,4 @@
 //hxcpp include should be first
-#include <hxcpp.h>
 #include "./linc_bass.h"
 
 namespace linc {

@@ -1,4 +1,5 @@
 <xml>
+    <!-- TODO: Flag appropriate deps based on usage where possible -->
 
     <files id='haxe'>
         <compilerflag value='-DLINC_BASS'/>
@@ -9,13 +10,21 @@
     <target id="haxe">
         <section if="windows">
             <lib name='${LINC_BASS_PATH}lib/bass.lib' />
+            <lib name='${LINC_BASS_PATH}lib/bass_fx.lib' />
+            <lib name='${LINC_BASS_PATH}lib/bassmix.lib' />
         </section>
         <section if="mac">
             <lib name='${LINC_BASS_PATH}deps/libbass.dylib' />
+            <lib name='${LINC_BASS_PATH}deps/libbass_fx.dylib' />
+            <lib name='${LINC_BASS_PATH}deps/libbassmix.dylib' />
         </section>
     </target>
 
     <copyFile name="bass.dll" from="${LINC_BASS_PATH}deps" if="windows"/>
+    <copyFile name="bass_fx.dll" from="${LINC_BASS_PATH}deps" if="windows"/>
+    <copyFile name="bassmix.dll" from="${LINC_BASS_PATH}deps" if="windows"/>
     <copyFile name="libbass.dylib" from="${LINC_BASS_PATH}deps" if="mac"/>
+    <copyFile name="libbass_fx.dylib" from="${LINC_BASS_PATH}deps" if="mac"/>
+    <copyFile name="libbassmix.dylib" from="${LINC_BASS_PATH}deps" if="mac"/>
 
 </xml>
