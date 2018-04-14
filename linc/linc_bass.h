@@ -1,14 +1,11 @@
-#pragma once
-
-#include <hxcpp.h>
-#include "../lib/bass.h"
-#include "../lib/bass_fx.h"
+#ifndef LINC_BASS_INCLUDE
+#define LINC_BASS_INCLUDE
+#include "hxcpp.h"
 
 namespace linc {
 
     namespace bass {
 
-        extern int test();
         extern int getNumDevices();
         extern bool getDeviceInfo(int index, Array<String> nameAndDriver, int* flags);
         extern bool getInfo(Array<int> out);
@@ -19,3 +16,4 @@ namespace linc {
     } //empty namespace
 
 } //linc
+#endif

@@ -1,13 +1,11 @@
-//hxcpp include should be first
+#include "hxcpp.h"
 #include "./linc_bass.h"
+#include "../lib/bass.h"
+#include "../lib/bass_fx.h"
 
 namespace linc {
 
     namespace bass {
-
-        int test() {
-            return 55;
-        }
 
         int getNumDevices(){
             int a, count=0;
