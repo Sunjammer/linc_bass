@@ -1,7 +1,8 @@
 package bass;
 
 import cpp.Pointer;
-typedef HWND = Pointer<cpp.Void>;
+typedef VoidPtr = Pointer<cpp.Void>;
+typedef HWND = VoidPtr;
 typedef CLSID = Int;
 typedef DWORD = Int;
 
@@ -16,11 +17,11 @@ extern class Bass {
 	// BASS_SetConfigPtr options
 	static inline var BASS_CONFIG_NET_AGENT	=	16;
 	static inline var BASS_CONFIG_NET_PROXY	=	17;
-	static inline var BASS_CONFIG_IOS_NOTIFY=		46;
+	static inline var BASS_CONFIG_IOS_NOTIFY=	46;
 
 	// DirectSound interfaces (for use with BASS_GetDSoundObject)
 	static inline var BASS_OBJECT_DS	=	1;	// IDirectSound
-	static inline var BASS_OBJECT_DS3DL	=2;	// IDirectSound3DListener
+	static inline var BASS_OBJECT_DS3DL	=	2;	// IDirectSound3DListener
 
 	// BASS_DEVICEINFO flags
 	static inline var BASS_DEVICE_ENABLED			= 1;                                                                                                                  
@@ -501,6 +502,12 @@ extern class Bass {
 		return untyped __cpp__("BASS_StreamCreateFile(true, (const WCHAR*)&{0}[0], {1}, {2}, {3})", bytes, offset, length, flags);
 	}
 
+	@:native("BASS_StreamPutData")
+	static function streamPutData(handle:Stream, buffer:VoidPtr, length:Int):Int;
+
+	@:native("BASS_StreamPutFileData")
+	static function streamPutFileData(handle:Stream, buffer:VoidPtr, length:Int):Int;
+
 	static inline function streamCreateURL(url:String, offset:Int, flags:Int, proc:Dynamic, user:Int):Stream{
 		force_include();
 		return untyped __cpp__("BASS_StreamCreateURL({0}.__s, {1}, {2}, {3}, {4})", url, offset, flags, proc, user); //TODO: Proc, user
@@ -571,6 +578,7 @@ extern class Bass {
 	@:native("BASS_ChannelSlideAttribute")
 	static function channelSlideAttribute(channel:Channel, attrib:Int, value:Float, time:Int):Bool;
 
+	//
 	
 	@:native("void") 
 	public static function force_include():Void{ };
