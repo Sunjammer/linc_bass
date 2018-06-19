@@ -352,7 +352,7 @@ extern class Bass {
 	static inline function init(device:Int, freq:Int, flags:Int, #if windows hwnd:HWND #else hwnd:Int #end, clsid:CLSID):Bool
 	{
 		#if !mac
-			untyped __cpp__("HWND w = (HWND)(void*){0};", hwnd);
+			untyped __cpp__("HWND w = (HWND)(void*){0}", hwnd);
 			return untyped __cpp__("BASS_Init({0},{1},{2},w,{3})", device, freq, flags, clsid);
 		#else
 			return untyped __cpp__("BASS_Init({0},{1},{2},{3},{4})", device, freq, flags, hwnd, clsid);
