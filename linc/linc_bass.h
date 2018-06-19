@@ -1,6 +1,7 @@
 #ifndef LINC_BASS_INCLUDE
 #define LINC_BASS_INCLUDE
 #include "hxcpp.h"
+#include "../lib/bass.h"
 
 namespace linc {
 
