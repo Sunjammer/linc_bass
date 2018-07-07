@@ -370,10 +370,10 @@ extern class Bass {
 
 	static inline function checkError():Bool{
 		var error = errorGetCode();
-        if(error != BassError.BASS_OK){
-            trace("There was an error");
+		if(error != BassError.BASS_OK){
+			trace("There was an error");
 			return false;
-        }
+		}
 		return true;
 	}
 
