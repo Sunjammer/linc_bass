@@ -1,6 +1,8 @@
 package bass;
 
-abstract Music(Int) from Int{
+@:noDebug
+@:unreflective
+extern abstract Music(Int) from Int{
 	public static inline var BASS_MUSIC_FLOAT		= Sample.BASS_SAMPLE_FLOAT;
 	public static inline var BASS_MUSIC_MONO		= Sample.BASS_SAMPLE_MONO;
 	public static inline var BASS_MUSIC_LOOP		= Sample.BASS_SAMPLE_LOOP;
@@ -32,5 +34,7 @@ abstract Music(Int) from Int{
         this = handle;
     }
     
-    @:to public inline function toChannel() return new Channel(this);
+    @:to public inline function toChannel():Channel{
+		return new Channel(this);
+	} 
 }

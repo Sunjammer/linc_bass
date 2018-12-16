@@ -1,6 +1,8 @@
 package bass;
 
-abstract Channel(Int) from Int{
+@:noDebug
+@:unreflective
+extern abstract Channel(Int) from Int{
     public var isValid(get, never):Bool;
     inline function get_isValid():Bool{
         return this!=0;

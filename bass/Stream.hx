@@ -1,6 +1,8 @@
 package bass;
 
-abstract Stream(Int) from Int {
+@:noDebug
+@:unreflective
+extern abstract Stream(Int) from Int {
 
 	public static inline var BASS_STREAM_PRESCAN	= 0x20000; // enable pin-point seeking/length (MP3/MP2/MP1)
 	public static inline var BASS_STREAM_AUTOFREE   = 0x40000;	// automatically free the stream when it stop/ends
@@ -18,5 +20,7 @@ abstract Stream(Int) from Int {
         return this!=0;
     }
 
-    @:to public inline function toChannel() return new Channel(this);
+    @:to public inline function toChannel():Channel{
+        return new Channel(this);  
+    }
 }

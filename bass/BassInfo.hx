@@ -2,7 +2,9 @@ package bass;
 
 import bass.Bass;
 
-abstract BassInfo(Array<Int>){
+@:noDebug
+@:unreflective
+extern abstract BassInfo(Array<Int>){
 
     public var flags(get, never):DWORD;
     inline function get_flags():DWORD{

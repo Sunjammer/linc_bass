@@ -1,7 +1,9 @@
 package bass;
 
 /** BASS_Init flags **/
-class BassInit{
+@:noDebug
+@:unreflective
+extern abstract BassInit(Void){
     /** 8 bit **/
     public static inline var BASS_DEVICE_8BITS	            = 1;		
     /** mono **/

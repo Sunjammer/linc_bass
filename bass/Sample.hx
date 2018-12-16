@@ -1,5 +1,7 @@
 package bass;
 
+@:noDebug
+@:unreflective
 @:allow(bass.Bass)
 class SampleInfo{
     public var freq:Int;
@@ -46,7 +48,9 @@ class SampleInfo{
     }
 }
 
-abstract Sample(Int) from Int {
+@:noDebug
+@:unreflective
+extern abstract Sample(Int) from Int {
 	public static inline var BASS_SAMPLE_8BITS		= 1;	// 8 bit
 	public static inline var BASS_SAMPLE_FLOAT		= 256;	// 32 bit floating-point
 	public static inline var BASS_SAMPLE_MONO		= 2;	// mono
