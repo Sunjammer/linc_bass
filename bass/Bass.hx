@@ -581,7 +581,7 @@ extern class Bass {
 	//
 	
 	@:native("void") 
-	public static function force_include():Void{ };
+	public static function force_include():Void;
 
 } //bass
 
